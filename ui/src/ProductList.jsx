@@ -25,6 +25,7 @@ export default class ProductList extends Component {
         this.createProduct = this.createProduct.bind(this);
         this.closeProduct = this.closeProduct.bind(this);
         this.deleteProduct = this.deleteProduct.bind(this);
+        this.countOfProducts= 0;
     }
     componentDidMount() {
         console.log("test message3")
@@ -66,6 +67,10 @@ export default class ProductList extends Component {
                     }
          }`;
         const data = await graphQLFetch(query, vars);
+        
+        console.log("load1");
+        console.log(Object.keys(data.ProductList).length);
+        this.countOfProducts = Object.keys(data.ProductList).length;
         console.log(data);
         if (data) {
             this.setState({ products: data.ProductList });
@@ -125,6 +130,7 @@ export default class ProductList extends Component {
         if (data && data.productDelete) {
         this.setState((prevState) => {
         const newList = [...prevState.products];
+        this.loadData();
         if (pathname === `/products/${Product_id}`) {
         history.push({ pathname: '/products', search });
         }
@@ -146,6 +152,7 @@ export default class ProductList extends Component {
                 <React.Fragment>
                     <ProductFilter />
                     <hr />
+                    <h4>Showing {this.countOfProducts} available products</h4>
                     <div className="table">
                         <ProductTable products={this.state.products} closeProduct={this.closeProduct} deleteProduct={this.deleteProduct}/>
                     </div>
