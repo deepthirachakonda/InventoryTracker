@@ -1,3 +1,10 @@
+End-To-End inventory tracker project that uses MERN stack (Mongo DB, Express JS, React JS, Node JS)
+- Can modify/add/delete inventory through UI and is reflected across backend database
+- Can track/ update prices for each item in the inventory
+- Used GraphQL as a query language
+
+
+
 install npm
 
 
